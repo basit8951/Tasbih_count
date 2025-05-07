@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tasbih Counter</title>
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .counter-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    #count {
+      font-size: 60px;
+      margin: 20px 0;
+      color: #2c3e50;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .count-btn {
+      background-color: #27ae60;
+      color: white;
+    }
+    .reset-btn {
+      background-color: #c0392b;
+      color: white;
+    }
+    input[type="number"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      width: 80px;
+    }
+    .target-message {
+      font-size: 14px;
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="counter-container">
+    <h1>Tasbih Counter</h1>
+    <input type="number" id="target" placeholder="Set target">
+    <div id="count">0</div>
+    <button class="btn count-btn" onclick="increment()">Count</button>
+    <button class="btn reset-btn" onclick="reset()">Reset</button>
+    <div class="target-message" id="targetMessage"></div>
+  </div>
+
+  <script>
+    let count = 0;
+    function increment() {
+      count++;
+      document.getElementById('count').innerText = count;
+      checkTarget();
+    }
+
+    function reset() {
+      count = 0;
+      document.getElementById('count').innerText = count;
+      document.getElementById('targetMessage').innerText = "";
+    }
+
+    function checkTarget() {
+      const target = parseInt(document.getElementById('target').value);
+      const message = document.getElementById('targetMessage');
+      if (!isNaN(target)) {
+        if (count === target) {
+          message.innerText = "Target reached!";
+        } else if (count > target) {
+          message.innerText = "You've exceeded the target!";
+        } else {
+          message.innerText = "";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
